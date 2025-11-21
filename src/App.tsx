@@ -234,7 +234,7 @@ const App: React.FC = () => {
       setState(AppState.IDLE);
     } catch (err) {
       console.error("Processing error:", err);
-      setError("Marcelo couldn't quite hear that. Try again.");
+      setError("Marcelo ne t'as pas compris Bro ! Répétes ta phrase encore une fois OKLM!");
       setState(AppState.ERROR);
       setTimeout(() => setState(AppState.IDLE), 3000);
     }
