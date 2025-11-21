@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Marcelo's Trip - Your English Buddy",
+  "description": "A voice-powered French to English - Thai translator and language tutor featuring Marcelo, your english AI avatar teacher and buddy !",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
