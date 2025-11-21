@@ -12,7 +12,8 @@
 
 ## 🎯 Le Concept
 
-Marcelo part en voyage et ne parle que français. Le problème ? Les locaux ne parlent qu'anglais ou thaï. La solution ? **Cette app !**
+Marcelo part en voyage et ne parle que malheureusement que...français. Quelle farce ?!?!
+C'est un problème car les locaux ne parlent qu'anglais ou thaï. La solution ? **Cette app !**
 
 Parlez dans votre langue, laissez Marcelo (l'IA) traduire en temps réel, et recevez même des tips culturels pour ne pas commettre d'impair ou finir avec des ladyboy... Parce qu'un voyage réussi commence par une bonne communication ! 🗣️✨
 
