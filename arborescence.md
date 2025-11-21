@@ -1,19 +1,19 @@
 
 # Structure du Projet Marcelo's Trip
 
-Voici comment organiser vos dossiers avant de les mettre sur GitHub.
+Voici l'arborescence actuelle du projet.
 
 ```text
 / (Racine du projet)
-├── .env.example                # Modèle pour la clé API (ne pas mettre la vraie clé ici pour GitHub)
-├── .gitignore                  # Indique à Git d'ignorer les fichiers sensibles
+├── README.md                   # Le mode d'emploi
+├── arborescence.md             # Ce fichier - Structure du projet
 ├── index.html                  # Le fichier principal qui lance l'app
+├── metadata.json               # Métadonnées du projet
 ├── package.json                # Liste des installations nécessaires (React, Vite...)
 ├── postcss.config.js           # Config CSS
 ├── tailwind.config.js          # Config Design
-├── tsconfig.json               # (Optionnel) Config TypeScript si présente
+├── tsconfig.json               # Config TypeScript
 ├── vite.config.ts              # Config du constructeur de site Vite
-├── README.md                   # Le mode d'emploi
 │
 └── src/                        # TOUT LE CODE EST ICI
     ├── index.css               # Le style global
