@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { AppState, TranslationResult, HistoryItem, TranslationDirection, ActiveTab, TargetLanguage } from './types';
 import { Avatar } from './components/Avatar';
@@ -189,7 +188,7 @@ const App: React.FC = () => {
       setState(AppState.RECORDING);
     } catch (err) {
       console.error("Error accessing microphone:", err);
-      setError("Please allow microphone access to talk to Marcelo.");
+      setError("Veuillez autoriser l'accès au micro.");
       setState(AppState.IDLE);
     }
   };
@@ -216,7 +215,6 @@ const App: React.FC = () => {
       const ttsAudio = await speakText(textToSpeak);
 
       // 3. UPDATE UI IMMEDIATELY
-      // This ensures the user sees the text and tip BEFORE the audio starts/finishes
       const fullResult = { ...result, audioData: ttsAudio };
       setCurrentTranslation(fullResult);
 
@@ -232,11 +230,13 @@ const App: React.FC = () => {
       await playBase64Audio(ttsAudio);
       
       setState(AppState.IDLE);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Processing error:", err);
-      setError("Marcelo ne t'as pas compris Bro ! Répétes ta phrase encore une fois OKLM!");
+      // Show actual error message to user
+      setError(err.message || "Une erreur s'est produite. Réessayez.");
       setState(AppState.ERROR);
-      setTimeout(() => setState(AppState.IDLE), 3000);
+      // Keep error visible longer so you can read it
+      setTimeout(() => setState(AppState.IDLE), 5000);
     }
   };
 
@@ -344,7 +344,7 @@ const App: React.FC = () => {
 
               {/* Error Message */}
               {error && (
-                <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm text-center mb-4 animate-bounce border border-red-100">
+                <div className="bg-red-50 text-red-600 p-4 rounded-lg text-sm text-center mb-4 animate-bounce border border-red-200 font-bold shadow-sm">
                   {error}
                 </div>
               )}
