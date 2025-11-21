@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { AppState, TranslationResult, HistoryItem, TranslationDirection, ActiveTab, TargetLanguage } from './types';
 import { Avatar } from './components/Avatar';
@@ -260,6 +261,15 @@ const App: React.FC = () => {
     }
   };
 
+  // Function to restore a history item to the main card view
+  const handleRestoreHistory = (item: HistoryItem) => {
+    if(state !== AppState.IDLE) return;
+    setCurrentTranslation(item);
+    // Optional: Scroll to top to see the card
+    const mainContainer = document.querySelector('.overflow-y-auto');
+    if(mainContainer) mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const filteredHistory = historyFilter === 'ALL' 
     ? history 
     : history.filter(h => h.isFavorite);
@@ -419,7 +429,11 @@ const App: React.FC = () => {
                         </div>
                       )}
                       {filteredHistory.map(item => (
-                          <div key={item.id} className="bg-white p-3 rounded-xl border border-slate-100 shadow-sm flex justify-between items-center gap-3 group transition-all hover:border-indigo-100">
+                          <div 
+                            key={item.id} 
+                            onClick={() => handleRestoreHistory(item)}
+                            className="bg-white p-3 rounded-xl border border-slate-100 shadow-sm flex justify-between items-center gap-3 group transition-all hover:border-indigo-200 cursor-pointer hover:bg-indigo-50/30"
+                          >
                               <div className="flex-1 min-w-0">
                                   <div className="flex justify-between items-center mb-1">
                                       <span className="text-xs font-bold text-slate-400 uppercase">{item.sourceLanguage} → {item.targetLanguage}</span>
@@ -433,16 +447,22 @@ const App: React.FC = () => {
                               
                               <div className="flex flex-col gap-1">
                                   <button 
-                                    onClick={() => handlePlayAudio(item.audioData)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handlePlayAudio(item.audioData);
+                                    }}
                                     disabled={state !== AppState.IDLE && state !== AppState.SPEAKING}
-                                    className="w-8 h-8 rounded-full bg-slate-50 text-indigo-500 flex items-center justify-center hover:bg-indigo-100 transition-colors"
+                                    className="w-8 h-8 rounded-full bg-slate-50 text-indigo-500 flex items-center justify-center hover:bg-indigo-100 transition-colors z-10"
                                     title="Play Audio"
                                   >
                                     <Volume2 size={14} />
                                   </button>
                                   <button 
-                                    onClick={() => toggleFavorite(item.id)}
-                                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${item.isFavorite ? 'bg-amber-50 text-amber-400' : 'bg-slate-50 text-slate-300 hover:text-amber-400'}`}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        toggleFavorite(item.id);
+                                    }}
+                                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors z-10 ${item.isFavorite ? 'bg-amber-50 text-amber-400' : 'bg-slate-50 text-slate-300 hover:text-amber-400'}`}
                                   >
                                     <Heart size={14} className={item.isFavorite ? 'fill-amber-400' : ''} />
                                   </button>
